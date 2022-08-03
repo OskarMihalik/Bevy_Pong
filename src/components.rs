@@ -26,3 +26,9 @@ pub struct Player;
 
 #[derive(Component)]
 pub struct Ball;
+
+#[derive(Component)]
+pub struct Stats {
+    pub player1: i32,
+    pub player2: i32,
+}

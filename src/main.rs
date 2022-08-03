@@ -6,10 +6,11 @@ use bevy::{
 };
 use components::{Ball, Movable, Player, SpriteSize, Velocity};
 use player::PlayerPlugin;
+use stats::StatsPlugin;
 mod ball;
 pub mod components;
 mod player;
-// pub mod stats;
+pub mod stats;
 
 pub const CLEAR: Color = Color::rgb(0.1, 0.1, 0.1);
 pub const PLAYER_CUSTOM_SIZE: (f32, f32) = (50., 200.);
@@ -40,6 +41,7 @@ fn main() {
             ..Default::default()
         })
         .add_plugins(DefaultPlugins)
+        .add_plugin(StatsPlugin)
         .add_plugin(PlayerPlugin)
         .add_plugin(BallPlugin)
         .add_startup_system(setup_system)
