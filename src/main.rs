@@ -9,6 +9,7 @@ use player::PlayerPlugin;
 mod ball;
 pub mod components;
 mod player;
+// pub mod stats;
 
 pub const CLEAR: Color = Color::rgb(0.1, 0.1, 0.1);
 pub const PLAYER_CUSTOM_SIZE: (f32, f32) = (50., 200.);
@@ -23,7 +24,7 @@ pub struct WinSize {
 }
 
 fn setup_system(mut commands: Commands, windows: Res<Windows>) {
-    commands.spawn_bundle(OrthographicCameraBundle::new_2d());
+    commands.spawn_bundle(Camera2dBundle::default());
 
     let window = windows.get_primary().unwrap();
     let (win_w, win_h) = (window.width(), window.height());
