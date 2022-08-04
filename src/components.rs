@@ -1,4 +1,12 @@
-use bevy::{math::Vec2, prelude::Component};
+use bevy::{
+    math::Vec2,
+    prelude::{Component, KeyCode},
+};
+
+pub enum PlayerNumber {
+    Player1,
+    Player2,
+}
 
 #[derive(Component)]
 pub struct Velocity {
@@ -22,13 +30,16 @@ impl From<(f32, f32)> for SpriteSize {
 }
 
 #[derive(Component)]
-pub struct Player;
+pub struct Player {
+    pub player: PlayerNumber,
+    pub player_uo_down_keys: (KeyCode, KeyCode),
+}
 
 #[derive(Component)]
 pub struct Ball;
 
 #[derive(Component)]
 pub struct Stats {
-    pub player1: i32,
-    pub player2: i32,
+    pub player1: u32,
+    pub player2: u32,
 }
