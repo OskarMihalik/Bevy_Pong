@@ -1,4 +1,4 @@
-use crate::components::{Ball, Movable, SpriteSize, Velocity};
+use crate::components::{Ball, Movable, SpriteSize, Stats, Velocity};
 use crate::{WinSize, BALL_SIZE, BASE_SPEED, TIME_STEP};
 use bevy::prelude::*;
 
@@ -37,6 +37,7 @@ fn ball_spawn_system(mut commands: Commands) {
 fn bounce_system(
     win_size: Res<WinSize>,
     mut query: Query<(&mut Velocity, &mut Transform, &Movable), With<Ball>>,
+    mut query_stats: Query<&mut Stats>,
 ) {
     for (mut velocity, mut transform, movable) in query.iter_mut() {
         let translation = &mut transform.translation;
@@ -48,9 +49,11 @@ fn bounce_system(
                 || y - (BALL_SIZE.1 / 2.) <= (-win_size.h / 2.)
             {
                 velocity.y *= -1.;
-            } else if x + (BALL_SIZE.0 / 2.) >= (win_size.w / 2.)
-                || x - (BALL_SIZE.0 / 2.) <= (-win_size.w / 2.)
-            {
+            } else if x - (BALL_SIZE.0 / 2.) <= (-win_size.w / 2.) {
+                query_stats.single_mut().player2 += 1;
+                velocity.x *= -1.;
+            } else if x + (BALL_SIZE.0 / 2.) >= (win_size.w / 2.) {
+                query_stats.single_mut().player1 += 1;
                 velocity.x *= -1.;
             }
         }
