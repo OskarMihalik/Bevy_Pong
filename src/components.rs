@@ -32,7 +32,7 @@ impl From<(f32, f32)> for SpriteSize {
 #[derive(Component)]
 pub struct Player {
     pub player: PlayerNumber,
-    pub player_uo_down_keys: (KeyCode, KeyCode),
+    pub player_up_down_keys: (KeyCode, KeyCode),
 }
 
 #[derive(Component)]

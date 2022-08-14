@@ -15,7 +15,7 @@ fn ball_spawn_system(mut commands: Commands) {
     commands
         .spawn_bundle(SpriteBundle {
             sprite: Sprite {
-                color: Color::rgb(0.25, 0.21, 0.34),
+                color: Color::rgb(1., 0., 0.),
                 custom_size: Some(Vec2::new(BALL_SIZE.0, BALL_SIZE.1)),
                 ..Default::default()
             },

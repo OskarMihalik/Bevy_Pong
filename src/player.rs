@@ -22,7 +22,7 @@ fn player_spawn_system(mut commands: Commands, win_size: Res<WinSize>) {
         middle,
         Player {
             player: PlayerNumber::Player1,
-            player_uo_down_keys: (KeyCode::W, KeyCode::S),
+            player_up_down_keys: (KeyCode::W, KeyCode::S),
         },
     );
     player_spawner(
@@ -31,7 +31,7 @@ fn player_spawn_system(mut commands: Commands, win_size: Res<WinSize>) {
         middle,
         Player {
             player: PlayerNumber::Player2,
-            player_uo_down_keys: (KeyCode::Up, KeyCode::Down),
+            player_up_down_keys: (KeyCode::Up, KeyCode::Down),
         },
     );
 }
@@ -40,7 +40,7 @@ fn player_spawner(commands: &mut Commands, x: f32, y: f32, player: Player) {
     commands
         .spawn_bundle(SpriteBundle {
             sprite: Sprite {
-                color: Color::rgb(0.25, 0.21, 0.34),
+                color: Color::rgb(1., 1., 1.),
                 custom_size: Some(Vec2::new(PLAYER_CUSTOM_SIZE.0, PLAYER_CUSTOM_SIZE.1)),
                 ..Default::default()
             },
@@ -64,9 +64,9 @@ fn player_keyboard_event_system(
     mut query: Query<(&mut Velocity, &Player)>,
 ) {
     for (mut velocity, player) in query.iter_mut() {
-        velocity.y = if kb.pressed(player.player_uo_down_keys.0) {
+        velocity.y = if kb.pressed(player.player_up_down_keys.0) {
             1.
-        } else if kb.pressed(player.player_uo_down_keys.1) {
+        } else if kb.pressed(player.player_up_down_keys.1) {
             -1.
         } else {
             0.
